@@ -3,8 +3,8 @@ body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #f9f9fb, #eaeff3);
-  color: #333;
+  background: linear-gradient(to bottom, #f8f9fa, #eaeef3); /* Soft white gradient */
+  color: #495057; /* Cool grey text */
   line-height: 1.6;
 }
 
@@ -13,7 +13,7 @@ body {
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #ffffff; /* White */
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   overflow: hidden;
@@ -21,7 +21,7 @@ body {
 
 /* Header */
 .header {
-  background: linear-gradient(90deg, #4e54c8, #8f94fb);
+  background: linear-gradient(90deg, #A593E0, #F67280); /* Lavender to Coral gradient */
   color: white;
   text-align: center;
   padding: 25px;
@@ -38,7 +38,7 @@ body {
 .header p {
   margin: 10px 0 0;
   font-size: 1.2em;
-  color: #e0eaff;
+  color: #f0ebf8; /* Light lavender */
 }
 
 /* Pages */
@@ -53,7 +53,7 @@ body {
 
 /* Buttons */
 .btn {
-  background: linear-gradient(to right, #56ccf2, #2f80ed);
+  background: linear-gradient(to right, #99E1D9, #F67280); /* Mint Green to Coral */
   color: white;
   padding: 12px 20px;
   border: none;
@@ -69,18 +69,18 @@ body {
 }
 
 .btn:hover {
-  background: linear-gradient(to right, #2f80ed, #1c54b2);
+  background: linear-gradient(to right, #F67280, #A593E0); /* Coral to Lavender */
   transform: translateY(-2px);
 }
 
 .secondary-btn {
-  background: #eaeef3;
-  color: #333;
-  border: 1px solid #ccc;
+  background: #eaeff3; /* Neutral grey */
+  color: #495057; /* Cool grey */
+  border: 1px solid #d6dae3;
 }
 
 .secondary-btn:hover {
-  background: #d6dae3;
+  background: #d6dae3; /* Slightly darker grey */
   transform: translateY(-2px);
 }
 
@@ -89,14 +89,14 @@ form label {
   font-weight: bold;
   margin-bottom: 5px;
   display: block;
-  color: #555;
+  color: #343A40; /* Dark grey */
 }
 
 input, select {
   padding: 12px;
   font-size: 1em;
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc; /* Neutral grey */
   border-radius: 8px;
   box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -104,14 +104,14 @@ input, select {
 
 input:focus, select:focus {
   outline: none;
-  border-color: #2f80ed;
-  box-shadow: 0 0 5px rgba(47, 128, 237, 0.5);
+  border-color: #99E1D9; /* Mint Green */
+  box-shadow: 0 0 5px rgba(153, 225, 217, 0.5); /* Mint Green Glow */
 }
 
 /* Fare Estimate Section */
 #fare-estimate {
-  background-color: #f9f9fb;
-  border: 1px solid #e0e0e0;
+  background-color: #f0f5f9; /* Very light blue-grey */
+  border: 1px solid #dfe3e8;
   padding: 15px;
   border-radius: 8px;
   text-align: left;
@@ -125,8 +125,8 @@ input:focus, select:focus {
 
 /* Confirmation Summary */
 #rideSummary {
-  background-color: #f3f8fc;
-  border: 1px solid #dfe7f2;
+  background-color: #F8F9FA; /* Soft white */
+  border: 1px solid #dfe7ec; /* Light grey-blue */
   padding: 15px;
   border-radius: 8px;
   text-align: left;
@@ -135,11 +135,11 @@ input:focus, select:focus {
 #rideSummary p {
   margin: 10px 0;
   font-size: 1.1em;
-  color: #555;
+  color: #495057; /* Cool grey */
 }
 
 #rideSummary strong {
-  color: #2f80ed;
+  color: #A593E0; /* Lavender highlight */
 }
 
 /* Toast Message */
@@ -147,7 +147,7 @@ input:focus, select:focus {
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #4caf50;
+  background-color: #F67280; /* Coral */
   color: white;
   padding: 15px;
   border-radius: 8px;
@@ -202,4 +202,3 @@ footer {
     font-size: 1em;
   }
 }
-
