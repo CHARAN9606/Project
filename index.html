@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RideShare - Enhanced</title>
-    <!-- Link to Google Fonts for Poppins and Lora -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Lora:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RideShare - Enhanced with Live Driver Location</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
 <body>
-  <div class="toast" id="toast">Toast Message</div>
+  <div class="toast" id="toast"></div>
   <div class="app-container">
     <header class="header">
       <h1>RideShare</h1>
-      <p>More than a ride, it's an experience.</p>
+      <p>Your reliable ride, anytime.</p>
     </header>
-
     <main>
       <!-- Login Page -->
       <section id="login-page" class="page">
@@ -24,14 +21,11 @@
         <form id="loginForm">
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
           <button type="button" class="btn" onclick="handleLogin()">Login</button>
         </form>
       </section>
-
       <!-- Home Page -->
       <section id="home-page" class="page hidden">
         <h2>Welcome, <span id="user-name"></span></h2>
@@ -39,7 +33,6 @@
         <button class="btn" onclick="showRideForm()">Book a Ride</button>
         <button class="btn secondary-btn" onclick="logout()">Logout</button>
       </section>
-
       <!-- Ride Form -->
       <section id="ride-form" class="page hidden">
         <h2>Book a Ride</h2>
@@ -50,58 +43,53 @@
             <option value="Bengaluru">Bengaluru</option>
             <option value="Mysuru">Mysuru</option>
             <option value="Mangaluru">Mangaluru</option>
-            <option value="Hubballi">Hubballi</option>
+            <!-- <option value="Hubballi">Hubballi</option>
             <option value="Belagavi">Belagavi</option>
             <option value="Davangere">Davangere</option>
             <option value="Shimoga">Shimoga</option>
-            <option value="Tumakuru">Tumakuru</option>
-            <!-- Add more cities -->
+            <option value="Tumakuru">Tumakuru</option> -->
           </select>
-
           <label for="dropoff">Drop-off Location:</label>
           <select id="dropoff" name="dropoff" required>
             <option value="" disabled selected>Select drop-off location</option>
             <option value="Bengaluru">Bengaluru</option>
             <option value="Mysuru">Mysuru</option>
             <option value="Mangaluru">Mangaluru</option>
-            <option value="Hubballi">Hubballi</option>
+            <!-- <option value="Hubballi">Hubballi</option>
             <option value="Belagavi">Belagavi</option>
             <option value="Davangere">Davangere</option>
             <option value="Shimoga">Shimoga</option>
-            <option value="Tumakuru">Tumakuru</option>
-            <!-- Add more cities -->
+            <option value="Tumakuru">Tumakuru</option> -->
           </select>
-
           <label for="rideType">Ride Type:</label>
           <select id="rideType" name="rideType">
             <option value="Economy">Economy</option>
             <option value="Standard">Standard</option>
             <option value="Luxury">Luxury</option>
           </select>
-
+          <button type="button" class="btn" onclick="calculateFare()">Calculate Fare</button>
           <div id="fare-estimate" class="hidden">
             <p><strong>Distance:</strong> <span id="distance"></span> km</p>
             <p><strong>Estimated Fare:</strong> ₹<span id="fare"></span></p>
           </div>
-
-          <button type="button" class="btn" onclick="calculateFare()">Calculate Fare</button>
           <button type="button" class="btn" onclick="confirmRide()">Confirm Ride</button>
         </form>
       </section>
-
       <!-- Confirmation Page -->
       <section id="confirmation-page" class="page hidden">
-        <h2>Ride Confirmation</h2>
-        <div id="rideSummary"></div>
-        <button class="btn" onclick="resetApp()">Book Another Ride</button>
-      </section>
-    </main>
+      <h2>Ride Confirmation</h2>
+      <div id="rideSummary"></div>
+      <button class="btn" onclick="resetApp()">Book Another Ride</button>
+      <button class="btn secondary-btn" onclick="logout()">Logout</button>
+      <div id="map" class="map"></div>
+    </section>
 
+    </main>
     <footer>
       <p>&copy; 2024 RideShare. All rights reserved.</p>
     </footer>
   </div>
-
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

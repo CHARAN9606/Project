@@ -1,212 +1,100 @@
-/* General Styles */
 body {
-  font-family: 'Poppins', sans-serif; /* Main font for body */
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #f8f9fa, #eaeef3); /* Soft white gradient */
-  color: #495057; /* Cool grey text */
+  background: linear-gradient(to bottom, #f9f9f9, #e6e6ff);
+  color: #333;
   line-height: 1.6;
 }
-
-/* App Container */
 .app-container {
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #ffffff; /* White */
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
-  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
 }
-
-/* Header */
 .header {
-  background: linear-gradient(90deg, #A593E0, #F67280); /* Lavender to Coral gradient */
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
   color: white;
   text-align: center;
-  padding: 25px;
-  border-radius: 15px 15px 0 0;
+  padding: 20px;
+  border-radius: 12px 12px 0 0;
 }
-
 .header h1 {
   margin: 0;
-  font-family: 'Poppins', sans-serif; /* Modern sans-serif for the title */
-  font-size: 2.8em;
+  font-size: 2.5em;
   font-weight: bold;
-  letter-spacing: 1px;
 }
-
 .header p {
-  margin: 10px 0 0;
-  font-family: 'Lora', serif; /* Serif font for a more elegant feel */
+  margin-top: 10px;
   font-size: 1.2em;
-  color: #f0ebf8; /* Light lavender */
+  color: #e0f7ff;
 }
-
-/* Pages */
 .page {
   display: none;
   padding: 20px;
 }
-
 .page.active {
   display: block;
 }
-
-/* Buttons */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+input, select {
+  padding: 12px;
+  font-size: 1em;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: #0072ff;
+  box-shadow: 0 0 5px rgba(0, 114, 255, 0.5);
+}
 .btn {
-  background: linear-gradient(to right, #99E1D9, #F67280); /* Mint Green to Coral */
+  background: linear-gradient(to right, #4caf50, #81c784);
   color: white;
   padding: 12px 20px;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 1.1em;
   font-weight: bold;
   cursor: pointer;
   margin-top: 15px;
   transition: all 0.3s ease;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-family: 'Poppins', sans-serif; /* Matching button font */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 .btn:hover {
-  background: linear-gradient(to right, #F67280, #A593E0); /* Coral to Lavender */
+  background: linear-gradient(to right, #388e3c, #66bb6a);
   transform: translateY(-2px);
 }
-
 .secondary-btn {
-  background: #eaeff3; /* Neutral grey */
-  color: #495057; /* Cool grey */
-  border: 1px solid #d6dae3;
-  font-family: 'Poppins', sans-serif; /* Matching font */
+  background: linear-gradient(to right, #f44336, #ef5350);
 }
-
 .secondary-btn:hover {
-  background: #d6dae3; /* Slightly darker grey */
-  transform: translateY(-2px);
+  background: linear-gradient(to right, #d32f2f, #e53935);
 }
-
-/* Input Fields */
-form label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: block;
-  color: #343A40; /* Dark grey */
-  font-family: 'Poppins', sans-serif; /* Matching font */
-}
-
-input, select {
-  padding: 12px;
-  font-size: 1em;
-  width: 100%;
-  border: 1px solid #ccc; /* Neutral grey */
+.map {
+  height: 300px;
+  margin-top: 20px;
   border-radius: 8px;
-  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  font-family: 'Poppins', sans-serif; /* Matching font */
+  overflow: hidden;
 }
-
-input:focus, select:focus {
-  outline: none;
-  border-color: #99E1D9; /* Mint Green */
-  box-shadow: 0 0 5px rgba(153, 225, 217, 0.5); /* Mint Green Glow */
+.hidden {
+  display: none;
 }
-
-/* Fare Estimate Section */
-#fare-estimate {
-  background-color: #f0f5f9; /* Very light blue-grey */
-  border: 1px solid #dfe3e8;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: left;
-  margin-top: 15px;
-  font-family: 'Poppins', sans-serif; /* Matching font */
-}
-
-#fare-estimate p {
-  margin: 10px 0;
-  font-size: 1.1em;
-}
-
-/* Confirmation Summary */
-#rideSummary {
-  background-color: #F8F9FA; /* Soft white */
-  border: 1px solid #dfe7ec; /* Light grey-blue */
-  padding: 15px;
-  border-radius: 8px;
-  text-align: left;
-}
-
-#rideSummary p {
-  margin: 10px 0;
-  font-size: 1.1em;
-  color: #495057; /* Cool grey */
-  font-family: 'Lora', serif; /* Serif font for a more refined touch */
-}
-
-#rideSummary strong {
-  color: #A593E0; /* Lavender highlight */
-}
-
-/* Toast Message */
-.toast {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #F67280; /* Coral */
-  color: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 1000;
-}
-
-.toast.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Footer */
 footer {
   text-align: center;
   margin-top: 20px;
   font-size: 0.9em;
   color: #666;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.page {
-  animation: fadeIn 0.5s ease;
-}
-
-/* Media Query for Mobile */
-@media (max-width: 768px) {
-  .app-container {
-    margin: 20px;
-    padding: 15px;
-  }
-
-  .header h1 {
-    font-size: 2em;
-  }
-
-  .btn {
-    font-size: 1em;
-  }
 }
