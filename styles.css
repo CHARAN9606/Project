@@ -1,67 +1,81 @@
+/* Default Dark Theme */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #f9f9f9, #e6e6ff);
-  color: #333;
+  background: #121212; /* Dark background for the theme */
+  color: #e0e0e0; /* Light gray text for contrast */
   line-height: 1.6;
 }
+
 .app-container {
-  max-width: 600px;
-  margin: 50px auto;
+  max-width: 450px; /* More compact width */
+  margin: 30px auto; /* Reduced top margin */
   padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  background-color: #1e1e1e; /* Dark gray for the container */
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5); /* Deep shadow for a modern feel */
+  border-radius: 8px;
 }
+
 .header {
-  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  background: #3498db; /* Simple blue gradient for the header */
   color: white;
   text-align: center;
   padding: 20px;
-  border-radius: 12px 12px 0 0;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
+
 .header h1 {
   margin: 0;
-  font-size: 2.5em;
+  font-size: 2.2em;
   font-weight: bold;
 }
+
 .header p {
-  margin-top: 10px;
-  font-size: 1.2em;
-  color: #e0f7ff;
+  margin-top: 8px;
+  font-size: 1.1em;
+  color: #dcdde1;
 }
+
 .page {
   display: none;
   padding: 20px;
 }
+
 .page.active {
   display: block;
 }
+
 form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
+
 label {
   font-weight: bold;
-  margin-bottom: 5px;
+  color: #bdbdbd;
 }
+
 input, select {
   padding: 12px;
   font-size: 1em;
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid #333;
   border-radius: 8px;
-  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+  background: #2c2c2c;
+  color: #e0e0e0;
 }
+
 input:focus, select:focus {
   outline: none;
-  border-color: #0072ff;
-  box-shadow: 0 0 5px rgba(0, 114, 255, 0.5);
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.7);
 }
+
 .btn {
-  background: linear-gradient(to right, #4caf50, #81c784);
+  background: #27ae60;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -71,30 +85,113 @@ input:focus, select:focus {
   cursor: pointer;
   margin-top: 15px;
   transition: all 0.3s ease;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
+
 .btn:hover {
-  background: linear-gradient(to right, #388e3c, #66bb6a);
+  background: #2ecc71;
   transform: translateY(-2px);
 }
+
 .secondary-btn {
-  background: linear-gradient(to right, #f44336, #ef5350);
+  background: #e74c3c;
 }
+
 .secondary-btn:hover {
-  background: linear-gradient(to right, #d32f2f, #e53935);
+  background: #c0392b;
 }
-.map {
-  height: 300px;
-  margin-top: 20px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-.hidden {
-  display: none;
-}
+
 footer {
   text-align: center;
   margin-top: 20px;
   font-size: 0.9em;
-  color: #666;
+  color: #999;
 }
+
+/* Light Theme Styles */
+body.light {
+  background: #ffffff; /* Light background for the theme */
+  color: #333; /* Dark text for contrast */
+}
+
+.app-container.light {
+  background-color: #f4f4f4; /* Light gray for the container */
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header.light {
+  background: #3498db; /* Blue header for light theme */
+  color: #fff;
+}
+
+.header.light h1,
+.header.light p {
+  color: #333; /* Dark text for contrast */
+}
+
+input.light, select.light {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+input.light:focus, select.light:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.7);
+}
+
+.btn.light {
+  background: #3498db; /* Blue button for light theme */
+  color: white;
+}
+
+.btn.light:hover {
+  background: #2980b9;
+}
+
+.secondary-btn.light {
+  background: #e74c3c;
+}
+
+.secondary-btn.light:hover {
+  background: #c0392b;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+  background: #f39c12;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+#theme-toggle:hover {
+  background: #e67e22;
+}
+
+/* Map Styling */
+.map {
+  height: 300px; /* Map height for visibility */
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+.ride-share-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ride-share-info {
+  font-size: 1.1em; /* Slightly larger font size */
+  color: #bdbdbd; /* Muted color for the text */
+  font-weight: 500;
+}
+

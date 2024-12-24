@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RideShare - Enhanced with Live Driver Location</title>
+  <title>RideShare - by BCCS</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
@@ -16,7 +16,7 @@
     </header>
     <main>
       <!-- Login Page -->
-      <section id="login-page" class="page">
+      <section id="login-page" class="page active">
         <h2>Login</h2>
         <form id="loginForm">
           <label for="email">Email:</label>
@@ -25,7 +25,9 @@
           <input type="password" id="password" name="password" placeholder="Enter your password" required>
           <button type="button" class="btn" onclick="handleLogin()">Login</button>
         </form>
+        <button id="theme-toggle" class="btn secondary-btn" onclick="toggleTheme()">Switch Theme</button>
       </section>
+
       <!-- Home Page -->
       <section id="home-page" class="page hidden">
         <h2>Welcome, <span id="user-name"></span></h2>
@@ -33,6 +35,7 @@
         <button class="btn" onclick="showRideForm()">Book a Ride</button>
         <button class="btn secondary-btn" onclick="logout()">Logout</button>
       </section>
+
       <!-- Ride Form -->
       <section id="ride-form" class="page hidden">
         <h2>Book a Ride</h2>
@@ -43,11 +46,6 @@
             <option value="Bengaluru">Bengaluru</option>
             <option value="Mysuru">Mysuru</option>
             <option value="Mangaluru">Mangaluru</option>
-            <!-- <option value="Hubballi">Hubballi</option>
-            <option value="Belagavi">Belagavi</option>
-            <option value="Davangere">Davangere</option>
-            <option value="Shimoga">Shimoga</option>
-            <option value="Tumakuru">Tumakuru</option> -->
           </select>
           <label for="dropoff">Drop-off Location:</label>
           <select id="dropoff" name="dropoff" required>
@@ -55,11 +53,6 @@
             <option value="Bengaluru">Bengaluru</option>
             <option value="Mysuru">Mysuru</option>
             <option value="Mangaluru">Mangaluru</option>
-            <!-- <option value="Hubballi">Hubballi</option>
-            <option value="Belagavi">Belagavi</option>
-            <option value="Davangere">Davangere</option>
-            <option value="Shimoga">Shimoga</option>
-            <option value="Tumakuru">Tumakuru</option> -->
           </select>
           <label for="rideType">Ride Type:</label>
           <select id="rideType" name="rideType">
@@ -73,18 +66,34 @@
             <p><strong>Estimated Fare:</strong> ₹<span id="fare"></span></p>
           </div>
           <button type="button" class="btn" onclick="confirmRide()">Confirm Ride</button>
+          <!-- Add Ride Share Feature -->
+<!-- Add Ride Share Feature -->
+<div class="ride-share-container">
+  <p><strong class="ride-share-info">Enable Ride Share :</p>
+  <input type="checkbox" id="rideShareToggle">
+</div>
+
+
+<!-- Add Split Fare Option -->
+<div id="splitFareFields" class="hidden">
+  <label for="numPassengers"></label>
+  <input type="number" id="numPassengers" name="numPassengers" min="1" max="6" placeholder="Total no of passengers">
+</div>
+
         </form>
       </section>
-      <!-- Confirmation Page -->
-      <section id="confirmation-page" class="page hidden">
-      <h2>Ride Confirmation</h2>
-      <div id="rideSummary"></div>
-      <button class="btn" onclick="resetApp()">Book Another Ride</button>
-      <button class="btn secondary-btn" onclick="logout()">Logout</button>
-      <div id="map" class="map"></div>
-    </section>
+      
+<!-- Ride Confirmation Page -->
+<section id="confirmation-page" class="page hidden">
+  <h2>Ride Confirmation</h2>
+  <div id="rideSummary"></div>
+  <button class="btn" onclick="resetApp()">Book Another Ride</button>
+  <button class="btn secondary-btn" onclick="logout()">Logout</button>
+  <div id="map" class="map"></div>
+  <!-- New Back to Booking Button -->
+  <button class="btn" onclick="backToBooking()">Back to Booking</button>
+</section>
 
-    </main>
     <footer>
       <p>&copy; 2024 RideShare. All rights reserved.</p>
     </footer>

@@ -1,64 +1,104 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Display login page initially
-  document.getElementById('login-page').classList.add('active');
+  // Check stored theme in localStorage
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme) {
+    document.body.classList.add(currentTheme);
+    document.querySelector('.header').classList.add(currentTheme);
+    document.querySelector('.app-container').classList.add(currentTheme);
+    if (currentTheme === 'light') {
+      document.getElementById('theme-toggle').textContent = 'Switch to Dark Mode';
+    } else {
+      document.getElementById('theme-toggle').textContent = 'Switch to Light Mode';
+    }
+  } else {
+    document.body.classList.add('dark');
+    document.querySelector('.header').classList.add('dark');
+    document.querySelector('.app-container').classList.add('dark');
+  }
 });
 
-// Handle login functionality
+// Toggle Theme Function
+function toggleTheme() {
+  const body = document.body;
+  const appContainer = document.querySelector('.app-container');
+  const header = document.querySelector('.header');
+  const themeToggleButton = document.getElementById('theme-toggle');
+
+  if (body.classList.contains('dark')) {
+    body.classList.replace('dark', 'light');
+    appContainer.classList.replace('dark', 'light');
+    header.classList.replace('dark', 'light');
+    themeToggleButton.textContent = 'Switch to Dark Mode';
+    localStorage.setItem('theme', 'light');
+  } else {
+    body.classList.replace('light', 'dark');
+    appContainer.classList.replace('light', 'dark');
+    header.classList.replace('light', 'dark');
+    themeToggleButton.textContent = 'Switch to Light Mode';
+    localStorage.setItem('theme', 'dark');
+  }
+}
+
 function handleLogin() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  if (email && password) {
-    // Simulate successful login
-    document.getElementById('login-page').classList.remove('active');
-    document.getElementById('home-page').classList.add('active');
-    document.getElementById('user-name').textContent = email.split('@')[0];
-  } else {
-    alert('Please enter valid login details.');
-  }
+  // Send a POST request to the backend to verify credentials
+  fetch('http://localhost:3000/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email, password })
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message === 'Login successful!') {
+        document.getElementById('login-page').classList.remove('active');
+        document.getElementById('home-page').classList.add('active');
+        document.getElementById('user-name').textContent = email.split('@')[0];
+      } else {
+        alert('Invalid email or password.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }
 
-// Show ride booking form
+
 function showRideForm() {
   document.getElementById('home-page').classList.remove('active');
   document.getElementById('ride-form').classList.add('active');
 }
 
-// Logout functionality
 function logout() {
-  // Reset the UI and forms
   document.getElementById('login-page').classList.add('active');
   document.getElementById('home-page').classList.remove('active');
   document.getElementById('ride-form').classList.remove('active');
   document.getElementById('confirmation-page').classList.remove('active');
   document.getElementById('loginForm').reset();
-  document.getElementById('rideRequestForm').reset();
 }
 
-// Reset application for a new booking
 function resetApp() {
-  // Hide confirmation page and show home page
   document.getElementById('confirmation-page').classList.remove('active');
   document.getElementById('ride-form').classList.remove('active');
   document.getElementById('home-page').classList.add('active');
-
-  // Reset ride booking form
   document.getElementById('rideRequestForm').reset();
-  document.getElementById('fare-estimate').classList.add('hidden');
 }
 
-// Distances between cities
 const distances = {
-  "Bengaluru": { "Mysuru": 150, "Mangaluru": 350, "Hubballi": 400, "Belagavi": 500, "Davangere": 270 },
-  "Mysuru": { "Bengaluru": 150, "Mangaluru": 220, "Hubballi": 280, "Belagavi": 370 },
-  "Mangaluru": { "Bengaluru": 350, "Mysuru": 220, "Hubballi": 300, "Belagavi": 400 },
+  "Bengaluru": { "Mysuru": 150, "Mangaluru": 350, "Hubballi": 400 },
+  "Mysuru": { "Bengaluru": 150, "Mangaluru": 220 },
+  "Mangaluru": { "Bengaluru": 350, "Mysuru": 220 }
 };
 
-// Calculate fare based on distance and ride type
 function calculateFare() {
   const pickup = document.getElementById('pickup').value;
   const dropoff = document.getElementById('dropoff').value;
   const rideType = document.getElementById('rideType').value;
+  const isRideShare = document.getElementById('rideShareToggle').checked;
+  const numPassengers = parseInt(document.getElementById('numPassengers').value) || 1;
 
   if (pickup && dropoff && distances[pickup] && distances[pickup][dropoff]) {
     const distance = distances[pickup][dropoff];
@@ -66,22 +106,32 @@ function calculateFare() {
 
     let baseFare;
     if (rideType === "Economy") {
-      baseFare = 10; // ₹ per km for Economy
+      baseFare = 10;
     } else if (rideType === "Standard") {
-      baseFare = 15; // ₹ per km for Standard
+      baseFare = 15;
     } else if (rideType === "Luxury") {
-      baseFare = 20; // ₹ per km for Luxury
+      baseFare = 20;
     }
 
-    const totalFare = baseFare * distance;
-    document.getElementById('fare').textContent = totalFare;
+    let totalFare = baseFare * distance;
+
+    // if (isRideShare) {
+    //   totalFare *= 1; // Apply Ride Share Discount
+    // }
+
+    // Calculate fare per person
+    const farePerPassenger = (totalFare / numPassengers).toFixed(2);
+
+    // Display only fare per person if Ride Share is enabled
+    const displayedFare = isRideShare ? farePerPassenger : totalFare.toFixed(2);
+
+    document.getElementById('fare').textContent = displayedFare;
     document.getElementById('fare-estimate').classList.remove('hidden');
   } else {
     alert('Invalid pickup or drop-off location.');
   }
 }
 
-// Confirm ride and show ride summary
 function confirmRide() {
   const pickup = document.getElementById('pickup').value;
   const dropoff = document.getElementById('dropoff').value;
@@ -93,19 +143,14 @@ function confirmRide() {
       <p><strong>Drop-off:</strong> ${dropoff}</p>
       <p><strong>Ride Type:</strong> ${rideType}</p>
     `;
-
-    // Navigate to confirmation page
     document.getElementById('ride-form').classList.remove('active');
     document.getElementById('confirmation-page').classList.add('active');
-
-    // Initialize the map with driver's live location
     initializeMap(pickup);
   } else {
     alert('Please select both pickup and drop-off locations.');
   }
 }
 
-// Initialize the map
 function initializeMap(pickupLocation) {
   let driverLat, driverLon;
 
@@ -116,14 +161,9 @@ function initializeMap(pickupLocation) {
   } else if (pickupLocation === "Mangaluru") {
     driverLat = 12.8716;
     driverLon = 74.8420; // Mangaluru coordinates
-  } 
-  else if (pickupLocation === "Mysuru") {
+  } else if (pickupLocation === "Mysuru") {
     driverLat = 12.3084;
     driverLon = 76.6520; // Mysuru coordinates
-  } 
-  else  {
-    driverLat = 12.9136;
-    driverLon = 75.7046; // Default: Ujire
   }
 
   // Initialize Leaflet map
@@ -138,3 +178,9 @@ function initializeMap(pickupLocation) {
   const driverMarker = L.marker([driverLat, driverLon]).addTo(map);
   driverMarker.bindPopup("<b>Driver's Live Location</b>").openPopup();
 }
+function backToBooking() {
+  document.getElementById('confirmation-page').classList.remove('active');
+  document.getElementById('ride-form').classList.add('active');
+}
+
+
