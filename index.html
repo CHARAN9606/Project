@@ -25,8 +25,28 @@
           <input type="password" id="password" name="password" placeholder="Enter your password" required>
           <button type="button" class="btn" onclick="handleLogin()">Login</button>
         </form>
+        <p>Don't have an account? <button class="btn-link" onclick="showSignupPage()">Sign Up</button></p>
         <button id="theme-toggle" class="btn secondary-btn" onclick="toggleTheme()">Switch Theme</button>
       </section>
+
+      <!-- Sign-Up Page -->
+<section id="signup-page" class="page hidden">
+  <h2>Sign Up</h2>
+  <form id="signupForm">
+    <label for="signup-email">Email:</label>
+    <input type="email" id="signup-email" name="signup-email" placeholder="Enter your email" required>
+
+    <label for="signup-password">Password:</label>
+    <input type="password" id="signup-password" name="signup-password" placeholder="Enter your password" required>
+
+    <label for="confirm-password">Confirm Password:</label>
+    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+
+    <button type="button" class="btn" onclick="handleSignup()">Sign Up</button>
+  </form>
+  <p>Already have an account? <button class="btn-link" onclick="showLoginPage()">Login</button></p>
+</section>
+
 
       <!-- Home Page -->
       <section id="home-page" class="page hidden">
@@ -37,62 +57,65 @@
       </section>
 
       <!-- Ride Form -->
-      <section id="ride-form" class="page hidden">
-        <h2>Book a Ride</h2>
-        <form id="rideRequestForm">
-          <label for="pickup">Pickup Location:</label>
-          <select id="pickup" name="pickup" required>
-            <option value="" disabled selected>Select pickup location</option>
-            <option value="Bengaluru">Bengaluru</option>
-            <option value="Mysuru">Mysuru</option>
-            <option value="Mangaluru">Mangaluru</option>
-          </select>
-          <label for="dropoff">Drop-off Location:</label>
-          <select id="dropoff" name="dropoff" required>
-            <option value="" disabled selected>Select drop-off location</option>
-            <option value="Bengaluru">Bengaluru</option>
-            <option value="Mysuru">Mysuru</option>
-            <option value="Mangaluru">Mangaluru</option>
-          </select>
-          <label for="rideType">Ride Type:</label>
-          <select id="rideType" name="rideType">
-            <option value="Economy">Economy</option>
-            <option value="Standard">Standard</option>
-            <option value="Luxury">Luxury</option>
-          </select>
-          <button type="button" class="btn" onclick="calculateFare()">Calculate Fare</button>
-          <div id="fare-estimate" class="hidden">
-            <p><strong>Distance:</strong> <span id="distance"></span> km</p>
-            <p><strong>Estimated Fare:</strong> ₹<span id="fare"></span></p>
-          </div>
-          <button type="button" class="btn" onclick="confirmRide()">Confirm Ride</button>
-          <!-- Add Ride Share Feature -->
-<!-- Add Ride Share Feature -->
-<div class="ride-share-container">
-  <p><strong class="ride-share-info">Enable Ride Share :</p>
-  <input type="checkbox" id="rideShareToggle">
-</div>
+<section id="ride-form" class="page hidden">
+  <h2>Book a Ride</h2>
+  <form id="rideRequestForm">
+    <label for="pickup">Pickup Location:</label>
+    <select id="pickup" name="pickup" required>
+      <option value="" disabled selected>Select pickup location</option>
+      <option value="Bengaluru">Bengaluru</option>
+      <option value="Mysuru">Mysuru</option>
+      <option value="Mangaluru">Mangaluru</option>
+    </select>
 
+    <label for="dropoff">Drop-off Location:</label>
+    <select id="dropoff" name="dropoff" required>
+      <option value="" disabled selected>Select drop-off location</option>
+      <option value="Bengaluru">Bengaluru</option>
+      <option value="Mysuru">Mysuru</option>
+      <option value="Mangaluru">Mangaluru</option>
+    </select>
 
-<!-- Add Split Fare Option -->
-<div id="splitFareFields" class="hidden">
-  <label for="numPassengers"></label>
-  <input type="number" id="numPassengers" name="numPassengers" min="1" max="6" placeholder="Total no of passengers">
-</div>
+    <label for="rideType">Ride Type:</label>
+    <select id="rideType" name="rideType">
+      <option value="Economy">Economy</option>
+      <option value="Standard">Standard</option>
+      <option value="Luxury">Luxury</option>
+    </select>
 
-        </form>
-      </section>
-      
-<!-- Ride Confirmation Page -->
-<section id="confirmation-page" class="page hidden">
-  <h2>Ride Confirmation</h2>
-  <div id="rideSummary"></div>
-  <button class="btn" onclick="resetApp()">Book Another Ride</button>
-  <button class="btn secondary-btn" onclick="logout()">Logout</button>
-  <div id="map" class="map"></div>
-  <!-- New Back to Booking Button -->
-  <button class="btn" onclick="backToBooking()">Back to Booking</button>
+    <!-- Ride Share Option -->
+    <div class="ride-share-container">
+      <p><strong>Enable Ride Share:</strong></p>
+      <input type="checkbox" id="rideShareToggle" onclick="toggleSplitFareFields()">
+    </div>
+
+    <!-- Split Fare Fields -->
+    <div id="splitFareFields" class="hidden">
+      <label for="numPassengers">Number of Passengers:</label>
+      <input type="number" id="numPassengers" name="numPassengers" min="1" max="6" placeholder="Enter total number of passengers">
+    </div>
+
+    <button type="button" class="btn" onclick="calculateFare()">Calculate Fare</button>
+
+    <div id="fare-estimate" class="hidden">
+      <p><strong>Distance:</strong> <span id="distance"></span> km</p>
+      <p><strong>Estimated Fare:</strong> ₹<span id="fare"></span></p>
+    </div>
+
+    <button type="button" class="btn" onclick="confirmRide()">Confirm Ride</button>
+  </form>
 </section>
+
+      <!-- Ride Confirmation Page -->
+      <section id="confirmation-page" class="page hidden">
+        <h2>Ride Confirmation</h2>
+        <div id="rideSummary"></div>
+        <button class="btn" onclick="resetApp()">Book Another Ride</button>
+        <button class="btn secondary-btn" onclick="logout()">Logout</button>
+        <div id="map" class="map"></div>
+        <button class="btn" onclick="backToBooking()">Back to Booking</button>
+      </section>
+    </main>
 
     <footer>
       <p>&copy; 2024 RideShare. All rights reserved.</p>

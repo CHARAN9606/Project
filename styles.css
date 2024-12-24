@@ -9,11 +9,11 @@ body {
 }
 
 .app-container {
-  max-width: 450px; /* More compact width */
-  margin: 30px auto; /* Reduced top margin */
+  max-width: 450px; /* Compact width for mobile and desktop compatibility */
+  margin: 30px auto;
   padding: 20px;
   background-color: #1e1e1e; /* Dark gray for the container */
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5); /* Deep shadow for a modern feel */
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for a modern feel */
   border-radius: 8px;
 }
 
@@ -101,6 +101,21 @@ input:focus, select:focus {
   background: #c0392b;
 }
 
+.btn-link {
+  background: none;
+  border: none;
+  color: #3498db;
+  font-size: 1em;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-weight: bold;
+}
+
+.btn-link:hover {
+  color: #2980b9;
+}
+
 footer {
   text-align: center;
   margin-top: 20px;
@@ -176,12 +191,14 @@ input.light:focus, select.light:focus {
 
 /* Map Styling */
 .map {
-  height: 300px; /* Map height for visibility */
+  height: 300px;
   margin-top: 20px;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
+
+/* Ride-Share Toggle */
 .ride-share-container {
   display: flex;
   align-items: center;
@@ -190,8 +207,12 @@ input.light:focus, select.light:focus {
 }
 
 .ride-share-info {
-  font-size: 1.1em; /* Slightly larger font size */
-  color: #bdbdbd; /* Muted color for the text */
+  font-size: 1.1em;
+  color: #bdbdbd;
   font-weight: 500;
 }
 
+/* Hidden Fields for Ride Sharing */
+.hidden {
+  display: none;
+}

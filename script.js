@@ -39,11 +39,11 @@ function toggleTheme() {
   }
 }
 
+// Handle Login
 function handleLogin() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  // Send a POST request to the backend to verify credentials
   fetch('http://localhost:3000/login', {
     method: 'POST',
     headers: {
@@ -66,6 +66,49 @@ function handleLogin() {
     });
 }
 
+function handleSignup() {
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
+  const confirmPassword = document.getElementById('confirm-password').value;
+
+  // Validate password confirmation
+  if (password !== confirmPassword) {
+    alert('Passwords do not match. Please try again.');
+    return;
+  }
+
+  fetch('http://localhost:3000/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.message === 'Sign-up successful!') {
+        alert('Sign-up successful! Please log in.');
+        showLoginPage();
+      } else {
+        alert(data.message);
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+
+// Navigation between pages
+function showSignupPage() {
+  document.getElementById('login-page').classList.remove('active');
+  document.getElementById('signup-page').classList.add('active');
+}
+
+function showLoginPage() {
+  document.getElementById('signup-page').classList.remove('active');
+  document.getElementById('login-page').classList.add('active');
+}
 
 function showRideForm() {
   document.getElementById('home-page').classList.remove('active');
@@ -87,12 +130,14 @@ function resetApp() {
   document.getElementById('rideRequestForm').reset();
 }
 
+// Distance data
 const distances = {
   "Bengaluru": { "Mysuru": 150, "Mangaluru": 350, "Hubballi": 400 },
   "Mysuru": { "Bengaluru": 150, "Mangaluru": 220 },
   "Mangaluru": { "Bengaluru": 350, "Mysuru": 220 }
 };
 
+// Calculate Fare
 function calculateFare() {
   const pickup = document.getElementById('pickup').value;
   const dropoff = document.getElementById('dropoff').value;
@@ -114,15 +159,7 @@ function calculateFare() {
     }
 
     let totalFare = baseFare * distance;
-
-    // if (isRideShare) {
-    //   totalFare *= 1; // Apply Ride Share Discount
-    // }
-
-    // Calculate fare per person
     const farePerPassenger = (totalFare / numPassengers).toFixed(2);
-
-    // Display only fare per person if Ride Share is enabled
     const displayedFare = isRideShare ? farePerPassenger : totalFare.toFixed(2);
 
     document.getElementById('fare').textContent = displayedFare;
@@ -131,7 +168,18 @@ function calculateFare() {
     alert('Invalid pickup or drop-off location.');
   }
 }
+function toggleSplitFareFields() {
+  const isRideShare = document.getElementById('rideShareToggle').checked;
+  const splitFareFields = document.getElementById('splitFareFields');
+  if (isRideShare) {
+    splitFareFields.classList.remove('hidden');
+  } else {
+    splitFareFields.classList.add('hidden');
+  }
+}
 
+
+// Confirm Ride
 function confirmRide() {
   const pickup = document.getElementById('pickup').value;
   const dropoff = document.getElementById('dropoff').value;
@@ -151,36 +199,31 @@ function confirmRide() {
   }
 }
 
+// Initialize Map
 function initializeMap(pickupLocation) {
   let driverLat, driverLon;
 
-  // Set driver's location based on pickup location
   if (pickupLocation === "Bengaluru") {
     driverLat = 12.9784;
-    driverLon = 77.5719; // Bengaluru coordinates
+    driverLon = 77.5719;
   } else if (pickupLocation === "Mangaluru") {
     driverLat = 12.8716;
-    driverLon = 74.8420; // Mangaluru coordinates
+    driverLon = 74.8420;
   } else if (pickupLocation === "Mysuru") {
     driverLat = 12.3084;
-    driverLon = 76.6520; // Mysuru coordinates
+    driverLon = 76.6520;
   }
 
-  // Initialize Leaflet map
   const map = L.map('map').setView([driverLat, driverLon], 13);
-
-  // Add OpenStreetMap tiles
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
 
-  // Add a marker for the driver
   const driverMarker = L.marker([driverLat, driverLon]).addTo(map);
   driverMarker.bindPopup("<b>Driver's Live Location</b>").openPopup();
 }
+
 function backToBooking() {
   document.getElementById('confirmation-page').classList.remove('active');
   document.getElementById('ride-form').classList.add('active');
 }
-
-
